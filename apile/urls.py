@@ -26,6 +26,7 @@ urlpatterns = [
     path('contact/',
          TemplateView.as_view(template_name='contact.html'),
          name='contact'),
+    path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('admin/', admin.site.urls),
 
 ]
