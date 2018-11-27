@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}
-Contact - {{ block.super }}
+{{ post.name }} - {{ block.super }}
 {% endblock title %}
-
 {% block content %}
-<h1>Contact Apile</h1>
-<p>Apile is in a pile (of shit).</p>
+<h1>{{ post.name }}</h1>
+<p>{{ post.description }}</p>
 {% endblock content %}
