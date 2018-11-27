@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
+
 {% block title %}
     Homepage - {{ block.super }}
 {% endblock title %}
 
 {% block content %}
-    <h1>A Pile of Links</h1>
-    <p>I am a basic pile.</p>
+{% for post in posts %}
+    <div class="container">
+        <p>{{ post.title }}</p>
+        <p>{{ post.description }}</p>
+        <p>{{ post.author }}</p>
+        <p>{{ post.url }}</p>
+{% endfor %}
 {% endblock content %}
