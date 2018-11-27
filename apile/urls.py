@@ -23,9 +23,8 @@ urlpatterns = [
     path('about/',
          TemplateView.as_view(template_name='about.html'),
          name='about'),
-    path('contact/',
-         TemplateView.as_view(template_name='contact.html'),
-         name='contact'),
+    path('contact/',TemplateView.as_view(template_name='contact.html'),name='contact'),
+    path('register/',TemplateView.as_view(template_name='register.html'), name='register'),
     path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('admin/', admin.site.urls),
 

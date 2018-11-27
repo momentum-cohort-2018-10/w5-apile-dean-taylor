@@ -1,15 +1,17 @@
 {% load staticfiles %}
 <!DOCTYPE HTML>
 <html>
+
 <head>
-    <title> 
-        {% block title %} 
-        Apile Project 
+    <title>
+        {% block title %}
+        Apile Project
         {% endblock title %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     {% block header %}{% endblock header %}
 </head>
+
 <body>
     <header>
         <h1>Apile App</h1>
@@ -18,10 +20,12 @@
                 <a href="{% url 'home' %}">Home</a>
                 <a href="{% url 'about'%}">About</a>
                 <a href="{% url 'contact'%}">Contact</a>
+                <a href="{% url 'register'%}">Register</a>
             </ul>
         </nav>
     </header>
     {% block content %}{% endblock content %}
     {% block footer %}{% endblock footer %}
 </body>
+
 </html>
