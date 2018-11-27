@@ -19,28 +19,44 @@
         <nav class="pa3 pa4-ns">
             <a class="link dim black b f6 f5-ns dib mr3" href="#" title="Home">APILE</a>
             <a class="link dim gray    f6 f5-ns dib mr3" href="{% url 'home' %}">Home</a>
-            <a class="link dim gray    f6 f5-ns dib mr3" href="{% url 'about'%}">About</a>
-            <a class="link dim gray    f6 f5-ns dib mr3" href="{% url 'contact'%}">Contact</a>
-            <a class="link dim gray    f6 f5-ns dib mr3" href="{% url 'register'%}">Register</a>
+            <a class="link dim gray    f6 f5-ns dib mr3" href="{% url 'about' %}">About</a>
+            <a class="link dim gray    f6 f5-ns dib mr3" href="{% url 'contact' %}">Contact</a>
+            <!-- <a class="link dim gray    f6 f5-ns dib mr3" href="{% url 'register' %}">Register</a> -->
             {% if user.is_authenticated %}
-            <a class="link dim gray    f6 f5-ns dib mr3"{% url 'auth_logout' %}">Logout</a>
+
+            <a class="link dim gray f6 f5-ns dib mr3" href="{% url 'auth_logout' %}">Logout</a>
+
             {% else %}
-            <a class="link dim gray    f6 f5-ns dib mr3"{% url 'auth_login' %}">Login</a>
-            <a class="link dim gray    f6 f5-ns dib mr3"{% url 'registration_register'%}">Register</a>
+
+            <a class="link dim gray f6 f5-ns dib mr3" href="{% url 'auth_login' %}">Login</a>
+
+            <a class="link dim gray f6 f5-ns dib mr3" href="{% url 'registration_register' %}">Register</a>
+
             {% endif %}
         </nav>
-
-
-        <!-- <ul>
-                <a href="{% url 'home' %}">Home</a>
-                <a href="{% url 'about'%}">About</a>
-                <a href="{% url 'contact'%}">Contact</a>
-                <a href="{% url 'register'%}">Register</a>
-            </ul> -->
-        <!-- </nav> -->
     </header>
+
+    <!-- <div class="textfield">
+        <label class="label">LABEL</label>
+        <div class="control">
+            <input class="input" type="text" placeholder="Type post here">
+        </div>
+        <p class="type"> Type here, ya dolt.</p> -->
+
+    <form class="pa4 black-80">
+        <div>
+            <label for="comment" class="f6 b db mb2">Leave your thoughts here. <span class="normal black-60">(please)</span></label>
+            <textarea id="comment" name="comment" class="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
+                aria-describedby="comment-desc"></textarea>
+            <small id="comment-desc" class="f6 black-60">Your post can be voted on by other users <a href="#" class="link underline black-80 hover-blue">Link
+                    here.</a></small>
+        </div>
+    </form>
+
+
     {% block content %}{% endblock content %}
     {% block footer %}{% endblock footer %}
 </body>
+
 
 </html>

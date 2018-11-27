@@ -13,3 +13,13 @@ class Post(Timestamp):
     description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
+
+
+class Vote(models.Model):
+    vote = models.BooleanField(null=True)
+    voter = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+
+
+
