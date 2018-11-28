@@ -5,7 +5,7 @@
 
 {% block content %}
     <h1><a href"{{ post.link }}">{{ post.title }}</a></h1>
-    <p>by {{ post.author}}</p>
+    <p>by  {{ post.author}}</p>
     <p>{{ post.description }}</p>
     {% if user == post.user %}
         <p>

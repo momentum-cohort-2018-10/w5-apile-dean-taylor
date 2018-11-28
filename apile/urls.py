@@ -25,6 +25,8 @@ from django.contrib.auth.views import (
     PasswordResetCompleteView,
 )
 
+# this is my test comment
+
 urlpatterns = [
     path('', views.index, name='home'),
     path('about/',
