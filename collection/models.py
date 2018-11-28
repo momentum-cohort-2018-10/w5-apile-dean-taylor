@@ -15,11 +15,7 @@ class Post(Timestamp):
     slug = models.SlugField(unique=True)
 
 
-class Vote(models.Model):
-    vote = models.BooleanField(null=True)
-    voter = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
-
-
-
+# class Vote(models.Model):
+#     vote = models.BooleanField(null=True)
+#     voter = models.ForeignKey(User, on_delete=models.CASCADE)
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
