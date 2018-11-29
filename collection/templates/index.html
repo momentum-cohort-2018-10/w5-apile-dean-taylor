@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Homepage - {{ block.super }}
+Homepage - {{ block.super }}
 {% endblock title %}
 
 {% block content %}
 {% for post in posts %}
-    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-    <p>by{{ post.author }}</p>
-    <p>{{ post.description }}</p>
+<h2><a href="">{{ post.text }}</a></h2>
+<p>by{{ post.author }}</p>
+<p>{{ post.post }}</p>
 {% endfor %}
 {% endblock content %}
