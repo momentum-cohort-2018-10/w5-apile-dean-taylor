@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from collection.forms import PostForm
 # from django.views.decorators.http import require_POST
-from django.contrib.auth.views import login_required
-from django.http import Http404
+# from django.contrib.auth.views import login_required
+# from django.http import Http404
 from collection.models import Post
 # from django.db.models import Count
-from django.template.defaultfilters import slugify
+# from django.template.defaultfilters import slugify
+
 
 # grabs objects and passes to the template
 
@@ -24,25 +25,70 @@ def post_detail(request, slug):
     })
 
 
-@login_required
-def edit_post(request, slug):
-    post = Post.objects.get(slug=slug)
-    if post.user != request.user:
-        raise Http404
-    form_class = PostForm
-    if request.method == 'POST':
-        form = form_class(data=request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            return redirect('post_detail', slug=post.slug)
 
-    else:
-        form = form_class(instance=post)
-
+def post_new(request):
+    form = PostForm()
     return render(request, 'posts/edit_post.html', {
-        'post': post,
-        'form': form,
+        'form': form
     })
+
+
+# DJANGO GIRLS to be edited from above
+# def post_new(request):
+#     if request.method == "POST":
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.author = request.user
+#             post.published_date = timezone.now()
+#             post.save()
+#             return redirect('post_detail', pk=post.pk)
+#     else:
+#         form = PostForm()
+#     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+
+
+
+
+
+# def create_post(request):
+#     form = PostForm
+#     if request.method == 'POST':
+#         form = form_class(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.user = request.user
+#             post.slug = slugify(post.name)
+#             post.save()
+#             return redirect('post_detail', slug=post.slug)
+#     else:
+#         form = form_class()
+
+#     return render(request, 'posts/create_post.html'), {
+#         'form': form,
+#     }
+
+# @login_required
+# def edit_post(request, slug):
+#     post = Post.objects.get(slug=slug)
+#     if post.user != request.user:
+#         raise Http404
+#     form_class = PostForm
+#     if request.method == 'POST':
+#         form = form_class(data=request.POST, instance=post)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('post_detail', slug=post.slug)
+
+#     else:
+#         form = form_class(instance=post)
+
+#     return render(request, 'posts/edit_post.html', {
+#         'post': post,
+#         'form': form,
+#     })
 
 # def render_post_list(request, header, posts):
 #     """want this to render if user is authenticated with title, link, description """
@@ -61,19 +107,4 @@ def edit_post(request, slug):
 # )
 
 
-def create_post(request):
-    form_class = PostForm
-    if request.method == 'POST':
-        form = form_class(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.slug = slugify(post.name)
-            post.save()
-            return redirect('post_detail', slug=post.slug)
-    else:
-        form = form_class()
 
-    return render(request, 'posts/create_post.html'), {
-        'form': form,
-    }
