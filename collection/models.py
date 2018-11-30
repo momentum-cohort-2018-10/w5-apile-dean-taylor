@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 class Timestamp(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
@@ -10,23 +9,14 @@ class Timestamp(models.Model):
 
 # New Class
 class Post(models.Model):
-    post = models.ForeignKey(User, on_delete=models.CASCADE)
-    author = models.CharField(max_length=200, default="", editable=False)
+    title = models.CharField(max_length=255, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(max_length=200)
-    approved_comment = models.BooleanField(default=False)
-
-    def approve(self):
-        self.approved_comment = True
-        self.save()
+    url = models.URLField(unique=True, null=True)
+    slug = models.SlugField(unique=True, max_length=255, null=True)
 
     def __str__(self):
-        return self.text
+        return self.title
 
 
 
-
-# ~~~~~~~~~~~~~~~~~
-# class Vote(models.Model):
-#     vote = models.BooleanField(null=True)
-#     voter = models.ForeignKey(User, on_delete=models.CASCADE)
-#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
