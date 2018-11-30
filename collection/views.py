@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from collection.forms import PostForm
 # from django.views.decorators.http import require_POST
 # from django.contrib.auth.views import login_required
@@ -25,10 +25,9 @@ def post_detail(request, slug):
     })
 
 
-
-def post_new(request):
+def create_post(request):
     form = PostForm()
-    return render(request, 'posts/edit_post.html', {
+    return render(request, 'posts/create_post.html', {
         'form': form
     })
 
@@ -48,15 +47,10 @@ def post_new(request):
 #     return render(request, 'blog/post_edit.html', {'form': form})
 
 
-
-
-
-
-
 # def create_post(request):
 #     form = PostForm
 #     if request.method == 'POST':
-#         form = form_class(request.POST)
+#         form = PostForm
 #         if form.is_valid():
 #             post = form.save(commit=False)
 #             post.user = request.user
@@ -64,7 +58,7 @@ def post_new(request):
 #             post.save()
 #             return redirect('post_detail', slug=post.slug)
 #     else:
-#         form = form_class()
+#         form = form(instance=post)
 
 #     return render(request, 'posts/create_post.html'), {
 #         'form': form,

@@ -35,10 +35,8 @@ urlpatterns = [
     path('contact/', TemplateView.as_view(template_name='contact.html'), name='contact'),
     path('register/', TemplateView.as_view(template_name='register.html'),
          name='register'),
-    path('post/new', views.post_new, name='post_new'),
+    path('post/create_post', views.create_post, name='create_post'),
     path('posts/<slug>/', views.post_detail, name='post_detail'),
-    # path('posts/<slug>/edit/',
-    #      views.edit_post, name='edit_post'),
     path(
         'accounts/password/reset/',
         PasswordResetView.as_view(
@@ -64,8 +62,8 @@ urlpatterns = [
     path(
         'accounts/register/', MyRegistrationView.as_view(),
         name='registration_register'),
-    # path('accounts/create_post/', views.create_post,
-    #      name='registration_create_post'),
+    path('accounts/create_post/', views.create_post,
+         name='registration_create_post'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
 
