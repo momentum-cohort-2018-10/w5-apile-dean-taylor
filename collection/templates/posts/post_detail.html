@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}
-    {{ post.title }} - {{ block.super }}
+{{ post.title }} - {{ block.super }}
 {% endblock title %}
 
 {% block content %}
-    <h1><a href"{{ post.link }}">{{ post.title }}</a></h1>
-    <p>by  {{ post.author}}</p>
-    <p>{{ post.description }}</p>
-    {% if user == post.user %}
-        <p>
-            <a href="{% url 'edit_post' slug=post.slug %}">
-                Edit me!
-            </a>
-        </p>
-    {% end if %}
+<h1><a href"{{ post.link }}">{{ post.title }}</a></h1>
+<p>by {{ post.author}}</p>
+<p>{{ post.description }}</p>
+{% if user == post.user %}
+<p>
+    <a href="{% url 'edit_post' slug=post.slug %}">
+        Edit me!
+    </a>
+</p>
+{% end if %}
 {% endblock content %}
