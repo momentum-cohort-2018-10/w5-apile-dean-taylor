@@ -6,7 +6,7 @@ from django.utils import timezone
 # from django.http import Http404
 from collection.models import Post
 # from django.db.models import Count
-# from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify
 
 
 # grabs objects and passes to the template

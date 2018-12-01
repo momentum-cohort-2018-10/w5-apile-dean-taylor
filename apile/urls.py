@@ -63,6 +63,9 @@ urlpatterns = [
     path(
         'accounts/register/', MyRegistrationView.as_view(),
         name='registration_register'),
+    path(
+        'accounts/create_post/', views.create_post,
+        name='registration_create_post'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
 
