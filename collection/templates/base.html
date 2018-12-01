@@ -20,7 +20,7 @@
 <body>
     <header>
 
-        <nav class="pa3 pa4-ns">
+        <nav class="pa4 pa4-ns">
             <a class="link dim black b f10 f18-ns dib mr2" href="#" title="Home">APILE</a>
             <a class="link dim gray    f10 f18-ns dib mr2" href="{% url 'home' %}">Home</a>
             <a class="link dim gray    f10 f18-ns dib mr2" href="{% url 'about' %}">About</a>
@@ -28,21 +28,27 @@
             {% if user.is_authenticated %}
 
             <a class="link dim gray f10 f18-ns dib mr3" href="{% url 'auth_logout' %}">Logout</a>
-
+             <div class="page-header">
+                <ul>
+                    <h2><a href="{% url 'create_post' %}" class="top-menu">Create a Post</a></h2>
+                </ul>
+            </div>
             {% else %}
 
             <a class="link dim gray f10 f18-ns dib mr3" href="{% url 'auth_login' %}">Login</a>
 
             <a class="link dim gray f10 f18-ns dib mr3" href="{% url 'registration_register' %}">Register</a>
-
+            
             {% endif %}
         </nav>
     </header>
-
+{% comment %} 
     <div class="page-header">
-        <a href="{% url 'create_post' %}" class="top-menu"></a>
-        <h1><a href="/">Posts</a></h1>
-    </div>
+        <ul>
+        <h2><a href="{% url 'create_post' %}" class="top-menu">Create Post</a></h2>
+        <h2><a href="/">Posts</a></h2>
+        </ul>
+    </div> {% endcomment %}
 
     {% comment %}
 

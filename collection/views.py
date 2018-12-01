@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from collection.forms import PostForm
-# from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST
+from django.utils import timezone
 # from django.contrib.auth.views import login_required
 # from django.http import Http404
 from collection.models import Post
@@ -26,7 +27,16 @@ def post_detail(request, slug):
 
 
 def create_post(request):
-    form = PostForm()
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.publication_date = timezone.now()
+            post.save()
+            return redirect('home')
+    else:
+        form = PostForm()
     return render(request, 'posts/create_post.html', {
         'form': form
     })
@@ -99,6 +109,3 @@ def create_post(request):
 #         "description": description
 #     }
 # )
-
-
-
