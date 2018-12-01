@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'apile.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'apile',
-        'USER':'apile',
-        'HOST':'127.0.0.1',
-        'PORT':'5432',
+        'NAME': 'apile',
+        'USER': 'apile',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
