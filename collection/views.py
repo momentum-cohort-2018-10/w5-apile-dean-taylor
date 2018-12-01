@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from collection.forms import PostForm
 from django.views.decorators.http import require_POST
 from django.utils import timezone
@@ -34,7 +34,7 @@ def create_post(request):
             post.author = request.user
             post.publication_date = timezone.now()
             post.save()
-            return redirect('index.hmtl', pk=post.pk)
+            return redirect('home')
     else:
         form = PostForm()
     return render(request, 'posts/create_post.html', {
