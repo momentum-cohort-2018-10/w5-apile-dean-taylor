@@ -20,3 +20,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Vote(models.Model):
+    post = models.ForeignKey(
+        to=Post, on_delete=models.CASCADE, related_name='votes')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (
+            'post',
+            'user',
+        )
