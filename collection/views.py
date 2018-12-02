@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.views import login_required
 # from django.http import Http404
 from collection.models import Post
-# from django.db.models import Count
+from django.db.models import Count, Q
 from django.template.defaultfilters import slugify
 
 
@@ -13,7 +13,11 @@ from django.template.defaultfilters import slugify
 
 
 def index(request):
-    posts = Post.objects.all().order_by('-created_date')
+    posts = Post.objects.all().annotate(
+        num_of_votes=Count('votes'),
+        vote_of_user=Count(
+            'votes',
+            filter=Q(votes__user=request.user))).order_by('-num_of_votes')
     return render(request, 'index.html', {
         'posts': posts
     })
@@ -46,38 +50,6 @@ def create_post(request):
 def toggle_vote(request):
     pass
 
-    # def create_post(request):
-    #     form = PostForm
-    #     if request.method == 'POST':
-    #         form = PostForm
-    #         if form.is_valid():
-    #             post = form.save(commit=False)
-    #             post.user = request.user
-    #             post.slug = slugify(post.name)
-    #             post.save()
-    #             return redirect('post_detail', slug=post.slug)
-    #     else:
-    #         form = form(instance=post)
-    #     return render(request, 'posts/create_post.html'), {
-    #         'form': form,
-    #     }
-    # @login_required
-    # def edit_post(request, slug):
-    #     post = Post.objects.get(slug=slug)
-    #     if post.user != request.user:
-    #         raise Http404
-    #     form_class = PostForm
-    #     if request.method == 'POST':
-    #         form = form_class(data=request.POST, instance=post)
-    #         if form.is_valid():
-    #             form.save()
-    #             return redirect('post_detail', slug=post.slug)
-    #     else:
-    #         form = form_class(instance=post)
-    #     return render(request, 'posts/edit_post.html', {
-    #         'post': post,
-    #         'form': form,
-    #     })
     # def render_post_list(request, header, posts):
     #     """want this to render if user is authenticated with title, link, description """
     # posts = posts.annotate(num_of_favorites=Count('favorites'))
