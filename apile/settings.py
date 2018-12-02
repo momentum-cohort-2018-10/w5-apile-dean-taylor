@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     # third party apps
+    'debug_toolbar',
 
     # my apps
     'collection',
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 ROOT_URLCONF = 'apile.urls'
@@ -140,8 +143,10 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_PORT = 1025
 
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
+INTERNAL_IPS = ['127.0.0.1']
 
 # Activate django_heroku
 django_heroku.settings(locals())

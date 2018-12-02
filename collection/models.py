@@ -18,5 +18,20 @@ class Post(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     slug = models.SlugField(unique=True, max_length=255, null=True)
 
+    def is_voted_by(self, user):
+        return self.votes.filter(user=user).count > 0
+
     def __str__(self):
         return self.title
+
+
+class Vote(models.Model):
+    post = models.ForeignKey(
+        to=Post, on_delete=models.CASCADE, related_name='votes')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (
+            'post',
+            'user',
+        )

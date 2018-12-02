@@ -9,6 +9,7 @@ django-extensions = "*"
 gunicorn = "*"
 django-heroku = "*"
 django-registration-redux = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 pylint = "*"

@@ -8,8 +8,22 @@
     {% if posts %}
         {% for post in posts %}
             <h2><a href="{{ post.url }}">{{ post.text }}</a></h2>
-            <p>by {{ post.author }} {{post.created_date}}</p>
             <p>{{ post.text }}</p>
+            <p>by {{ post.author }} {{post.created_date}}</p>
+            {% if request.user.is_authenticated %}
+            <p><form method="POST" class="dib">
+                {% csrf_token %}
+                <input type="hidden" name="post" value="{{ post.pk }}"> 
+                <button class="f6 ml2" type="submit">
+                    {% if vote_of_user %}Unvote{% else %}Vote{% endif %}
+                </button>
+            </form></p>
+            {% endif %}
+            <div class="flex">
+                <div class="mr2 pr2 bw1 br green">
+                    Voted {{ post.num_of_votes }} time{{ post.num_of_votes|pluralize}}
+                 </div>   
+            </div>
         {% endfor %}
     {% endif %}
 {% endblock content %}
