@@ -4,14 +4,34 @@
 {% endblock title %}
 
 {% block content %}
+{% if user.is_authenticated %}
+    {% if user == post.author %}
+    <p><a href="{% url 'edit_post' postid=post.pk %}">Edit</a><p/>
+    {% elif is_voted %}
+    <p><b>You have voted for this post!</b></p>
+    {% else %}
+    <p><a href="{% url 'vote_post' postid=post.pk %}">Vote this post!</a></p>
+    {% endif %}
+{% endif %}
+
+{% if post.link %}
 <h1><a href"{{ post.link }}">{{ post.title }}</a></h1>
-    <p>by {{ post.author}}</p>
-    <p>{{ post.description }}</p>
-{% if user == post.user %}
-<p>
-    <a href="{% url 'edit_post' slug=post.slug %}">
-        Edit me!
-    </a>
-</p>
-{% end if %}
+{% else %}
+<h1>{{ post.title }}</h1>
+{% endif %}
+    <p><b>Author:</b> {{ post.author}} <b>Votes:</b> {{post.vote_count}} <b>Created:</b> {{post.created_date}} <b>Last Update:</b> {{post.published_date}}</p>
+    <p><code>{{ post.text }}</code></p>
+<hr>
+{% if comments %}
+    {% for comment in comments %}
+        <h3><a href="/posts/{{ post.pk }}">{{ post.title }}</a></h3>
+        <hr/>
+    {% endfor %}
+{% endif %}
+
+{% block add_comment %}
+<!-- To be populated by add_comment.html -->
+{% endblock add_comment %}
+
+
 {% endblock content %}
