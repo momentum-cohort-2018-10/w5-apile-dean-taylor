@@ -5,24 +5,56 @@
 {% endblock title %}
 
 {% block content %}
+    <div>
+    <b>Actions</b> 
+    <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'create_post' %}" class="top-menu">Create a Post</a></h2>
+        {% endif %}
+
+        {% if sort_votes == "desc" %}
+        <li><a href="?page={{ page }}&sort_pub_date={{ sort_pub_date }}&sort_votes=asc" class="top-menu">Sort Votes Ascending</a></h2>
+        {% else %}
+        <li><a href="?page={{ page }}&sort_pub_date={{ sort_pub_date }}&sort_votes=desc" class="top-menu">Sort Votes Descending</a></h2>
+        {% endif %}
+
+        {% if sort_pub_date == "desc" %}
+        <li><a href="?page={{ page }}&sort_pub_date=asc&sort_votes={{ sort_votes }}" class="top-menu">Sort Publish Date Ascending</a></h2>
+        {% else %}
+        <li><a href="?page={{ page }}&sort_pub_date=desc&sort_votes={{ sort_votes }}" class="top-menu">Sort Publish Date Descending</a></h2>
+        {% endif %}
+
+    </ul>
+    <hr>
+    </div> 
+
     {% if posts %}
         {% for post in posts %}
-            <h2><a href="{{ post.url }}">{{ post.text }}</a></h2>
-            <p>{{ post.text }}</p>
-            <p>by {{ post.author }} {{post.created_date}}</p>
-            {% if request.user.is_authenticated %}
-            <p><form method="POST" class="dib">
-                {% csrf_token %}
-                <input type="hidden" name="post" value="{{ post.pk }}"> 
-                <button class="f6 ml2" type="submit">
-                    {% if vote_of_user %}Unvote{% else %}Vote{% endif %}
-                </button><div class="flex">
-                <div class="mr2 pr2 bw1">
-                    Voted {{ post.votes.count }} time{{ post.votes.count|pluralize}}
-                 </div>   
-                </div>
-            </form></p>
-            {% endif %}
+            <h3><a href="/posts/{{ post.pk }}">{{ post.title }}</a></h3>
+            <p>Votes: {{post.vote_count}} / Text: {{ post.text }} / Author: {{ post.author }}  / Created: {{post.created_date}} / Last Update: {{post.published_date}}</p>
+            <hr/>
         {% endfor %}
     {% endif %}
+
+    {% if posts.has_other_pages %}
+  <ul class="pagination">
+    {% if posts.has_previous %}
+      <li><a href="?page={{ posts.previous_page_number }}&sort_pub_date={{ sort_pub_date }}&sort_votes={{ sort_votes }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in posts.paginator.page_range %}
+      {% if posts.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}&sort_pub_date={{ sort_pub_date }}&sort_votes={{ sort_votes }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+      <li><a href="?page={{ posts.next_page_number }}&sort_pub_date={{ sort_pub_date }}&sort_votes={{ sort_votes }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
 {% endblock content %}
