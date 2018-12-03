@@ -40,6 +40,7 @@ urlpatterns = [
     path('posts/create/', views.create_post, name='create_post'),
     path('posts/edit/<int:postid>/', views.edit_post, name='edit_post'),
     path('posts/<int:postid>/', views.post_detail, name='post_detail'),
+    path('posts/vote_post/<int:postid>/', views.vote_post, name='vote_post'),
     path(
         'accounts/password/reset/',
         PasswordResetView.as_view(
@@ -65,6 +66,8 @@ urlpatterns = [
     path(
         'accounts/register/', MyRegistrationView.as_view(),
         name='registration_register'),
+    path('accounts/create_post/', views.create_post,
+        name='registration_create_post'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
 

@@ -31,7 +31,7 @@
     {% if posts %}
         {% for post in posts %}
             <h3><a href="/posts/{{ post.pk }}">{{ post.title }}</a></h3>
-            <p>Votes: {{post.vote_count}} / Text: {{ post.text }} / Author: {{ post.author }}  / Created: {{post.created_date}} / Last Update: {{post.published_date}}</p>
+            <p>Votes: {{ post.vote_count }} / Text: {{ post.text }} / Author: {{ post.author }}  / Created: {{post.created_date}} / Last Update: {{post.published_date}}</p>
             <hr/>
         {% endfor %}
     {% endif %}

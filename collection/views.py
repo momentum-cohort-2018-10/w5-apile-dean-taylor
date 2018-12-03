@@ -53,11 +53,12 @@ def post_detail(request, postid):
 
 
 def vote_post(request, postid):
-    vote = Vote()
-    vote.author = request.user
-    vote.post = Post.objects.filter(pk=postid)
-    vote.save()
-    return redirect('post_detail', postid=postid)
+        vote = Vote()
+        vote.author = request.user
+        vote.post = Post.objects.filter(pk=postid)
+        vote.save()
+        return redirect('post_detail', postid=postid)
+
     
 
 def create_post(request):
